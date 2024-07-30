@@ -17,9 +17,16 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+@api_view(['GET'])
+def test_connection(request):
+  return Response("Connection successful")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/v1/", test_connection),
     path("api/v1/users/", include("user_app.urls")),
     path("api/v1/tasks/", include("task_app.urls")),
 ]
